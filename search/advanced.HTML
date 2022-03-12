@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            .pageHeader {
+                color:rgb(252, 128, 128);
+                font-family: roboto,sans-serif;
+                font-size: 20px;
+                margin: 30px;
+                font-weight: 100;
+            }
+            
+            hr {
+                border-top: 1px;
+                margin-bottom: 20px;
+            }
+
+            .grid {
+                display: grid;
+                padding-left: 30px;
+                grid-column-gap: 20px;
+                grid-template-columns: 200px 35% 25%;
+            }
+
+            .inputFieldHeader {
+                color: white;
+                font-family: roboto, sans-serif;
+                position: relative;
+                top: 0%;
+                transform: translate(0%, -60%);
+                font-size: 15px;
+                font-weight: 100;
+                margin-top: 40px;
+            }
+
+            .inputFieldName {
+                color: rgb(211, 211, 211);
+                font-family: roboto, sans-serif;
+                font-size: 13px;
+                position: relative;
+                top: 0%;
+                transform: translate(0%, -8px);
+            }
+
+            .inputFieldDesc {
+                color: rgb(155, 155, 155);
+                font-family: roboto, sans-serif;
+                font-size: 12px;
+                position: relative;
+                top: 0%;
+                transform: translate(0%, -50%);
+            }
+
+            .inputFieldDescHighlight {
+                color: rgb(211, 211, 211);
+            }
+
+            .grid > input[type="text"] {
+                height: 20px;
+                background-color: rgb(31, 31, 31);
+                border-radius: 2px;
+                border-color: rgb(133, 133, 133);
+                border-style: solid;
+                border-width: thin;
+                color: rgb(211, 211, 211);
+                padding-left: 10px;
+            }
+
+            .grid > input[type="text"]:focus {
+                outline-color: #4c8bf5;
+                outline-style: solid;
+                outline-width: thin;
+            }
+
+            @media screen and (max-width: 1000px) {
+                .fade {
+                    display: none;
+                }
+            }
+
+            .advancedSearchButton {
+                float: right;
+                height: 35px;
+                font-family: roboto,sans-serif;
+                font-size: 13px;
+                color: white;
+                padding-left: 10px;
+                padding-right: 10px;
+                background-color: #86b3ff;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .advancedSearchButton:hover {
+                background-color: #adcbff;
+            }
+
+        </style>
+    </head>
+    <body class="pageBG">
+
+        <div>
+            <div class="righttopNav">
+                <a class="navbar-brand" href="index.html">
+                    <img class="navBarLogo" src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png">
+                </a>
+            </div>
+        </div>
+        <div style="clear:both">
+            <h2 class = "pageHeader">Advanced Search</h2>
+        </div>
+        <hr>
+        <div>
+            <div class="grid">
+                <p class="inputFieldHeader">Find pages with...</p>
+                <p></p>
+                <p class="inputFieldHeader fade">To do this in the search box.</p>
+            </div>
+        </div>
+        <div>
+            <form action="https://google.com/search">
+                <div class="grid">
+                    <p class="inputFieldName">all these words:</p>
+                    <input type="text" name="as_q" id="allWords">
+                    <p class="inputFieldDesc fade">Type the important words: <span class = "inputFieldDescHighlight">tri-colour rat terrier</span></p>
+                </div>
+                <div class="grid">
+                    <p class="inputFieldName">this exact word or phrase:</p>
+                    <input type="text" name="as_epq" id="exactWordPhrase">
+                    <p class="inputFieldDesc fade">Put exact words in quotes: <span class = "inputFieldDescHighlight">"rat terrier"</span></p>
+                </div>
+                <div class="grid">
+                    <p class="inputFieldName">any of these words:</p>
+                    <input type="text" name="as_oq" id="anyWord">
+                    <p class="inputFieldDesc fade">Type <span class = "inputFieldDescHighlight">OR</span> between all the words you want: <span class = "inputFieldDescHighlight">"miniature OR standard"</span></p>
+                </div>
+                <div class="grid">
+                    <p class="inputFieldName">none of these words:</p>
+                    <input type="text" name="as_eq" id="noneWord">
+                    <p class="inputFieldDesc fade">Put a minus sign just before words that you don't want: <br><span class = "inputFieldDescHighlight">-rodent, -"Jack Russell"</span></p>
+                </div>
+                <div class="grid">
+                    <p></p>
+                    <div>
+                        <button class ="advancedSearchButton" type="submit">Advanced Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
