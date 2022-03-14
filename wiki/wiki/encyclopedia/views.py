@@ -3,7 +3,7 @@ from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 import markdown2
-import regex as re
+from random import randrange
 
 from . import util
 
@@ -27,7 +27,12 @@ def reqSearch(request):
                     "empty" : len(filtered) == 0,
                     "entries": filtered,
                     "form": searchForm()
-                })                
+                })
+
+def randomPage(request):
+    entries = util.list_entries()
+    index = randrange(len(entries))
+    return HttpResponseRedirect(f"../{entries[index]}")
                 
 def index(request):
     return render(request, "encyclopedia/index.html", {
