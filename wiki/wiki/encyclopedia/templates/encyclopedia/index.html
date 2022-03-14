@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body %}
+    {% if alert%}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
     <h1>All Pages</h1>
 
     <ul>
