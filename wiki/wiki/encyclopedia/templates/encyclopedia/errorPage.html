@@ -1,0 +1,12 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    We could not find what you were looking for! :(
+{% endblock %}
+
+{% block body %}
+    <h2>Oh no! We could not find what you were looking for!</h2>
+    <br>
+    <p>But future you do not need to go through this! You can help by <a href = "{% url 'createPage' %}">creating</a> this as a new page!</p>
+
+{% endblock %}
