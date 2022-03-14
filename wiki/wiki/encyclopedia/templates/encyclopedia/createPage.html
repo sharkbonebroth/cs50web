@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body %}
+    {% if warn %}
+        <div class="alert alert-danger" role="alert">
+            The page {{ title }} has already been created. Do you want to <a href="/{{ title }}/editPage">edit</a> it instead?
+        </div>
+    {% endif %}
 
     <h2>Create Page</h2>
     <form method="POST" action="{% url 'createPage' %}">

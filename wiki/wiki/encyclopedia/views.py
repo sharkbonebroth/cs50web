@@ -101,8 +101,11 @@ def createPage(request):
                 new = title
                 return HttpResponseRedirect(reverse("index"))
             else:
-                #todo
-                return HttpResponse("nah")
+                return render(request, "encyclopedia/createPage.html", {
+                    "form": newPageForm(),
+                    "warn": True,
+                    "title": title,
+                })
     return render(request, "encyclopedia/createPage.html", {
         "form": newPageForm(),
     })
