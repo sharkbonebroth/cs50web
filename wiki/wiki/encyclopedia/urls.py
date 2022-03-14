@@ -8,4 +8,5 @@ urlpatterns = [
     path("random", views.randomPage, name="randomPage"),
     path("createPage", views.createPage, name="createPage"),
     path("<str:entryName>", views.reqEntry, name="reqEntry"),
+    path("<str:entryName>/editPage", views.editPage, name="editPage"),
 ]

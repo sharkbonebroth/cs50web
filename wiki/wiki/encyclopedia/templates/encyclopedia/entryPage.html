@@ -6,6 +6,12 @@
 
 {% block body %}
 
+    {% if displayEditedNoti %}
+        <div class="alert alert-primary" role="alert">
+            Edit Successfully made!
+        </div>
+    {% endif %}
+
     {{ HTML |safe }}
 
 {% endblock %}
