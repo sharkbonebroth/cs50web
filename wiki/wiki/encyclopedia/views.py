@@ -77,7 +77,7 @@ def reqEntry(request, entryName):
     displayEditedNoti = edited
     requestedEntry = util.get_entry(entryName)
     if requestedEntry is None:
-        data = "404 Not Found"
+        return render(request, "encyclopedia/errorPage.html")
     else:
         data = markdown2.markdown(requestedEntry)
         edited = False
