@@ -1,12 +1,12 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Create new page
+    Edit page: {{entryName}}
 {% endblock %}
 
 {% block body %}
 
-    <h2>Edit Page</h2>
+    <h2>Edit Page: {{entryName}}</h2>
     <form method="POST">
         {% csrf_token %}
         <textarea name="markdown">{{initial}}</textarea>

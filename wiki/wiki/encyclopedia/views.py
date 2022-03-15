@@ -31,16 +31,15 @@ def reqSearch(request):
             filtered = []
             entries = util.list_entries()
             for entry in entries:
+                if searchQuery.lower() == entry.lower():
+                    return HttpResponseRedirect(f"../{entry}")
                 if searchQuery.lower() in entry.lower():
                     filtered.append(entry)
-            if len(filtered) == 1:
-                return HttpResponseRedirect(f"../{filtered[0]}")
-            else:
-                return render(request, "encyclopedia/results.html", {
-                    "empty" : len(filtered) == 0,
-                    "entries": filtered,
-                    "form": searchForm()
-                })
+            return render(request, "encyclopedia/results.html", {
+                "empty" : len(filtered) == 0,
+                "entries": filtered,
+                "form": searchForm()
+            })
 
 def randomPage(request):
     entries = util.list_entries()
@@ -129,4 +128,5 @@ def editPage(request, entryName):
     else:
         return render(request, "encyclopedia/editPage.html", {
             "initial": markdownContent,
+            "entryName": entryName,
         })
