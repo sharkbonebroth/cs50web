@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% load static %}
+{% load tz %}
+
+    <div class="pageBody">
+        <h2>Watchlist</h2>
+    </div>
+    <div class="displayAuctions">
+        {% if watchlistListings %}
+            {% for listing in watchlistListings %}
+                {% if listing.open %}
+                <div>
+                {% else %}
+                <div class="closedListing">
+                {% endif %}
+                    <div class="listingImageDiv">
+                        <a href="{% url 'reqListing' listingId=listing.listingId %}"><img class = "listingImage" src="{{listing.imageURL}}" alt="No image available"></a>
+                    </div>
+                    <div class="listingDetails">
+                        <p class="itemName"><a href="{% url 'reqListing' listingId=listing.listingId %}" class="itemLink">{{listing.itemName}}</a></p>
+                        {% if listing.open %}    
+                            {% if listing.maxBid %}
+                                <p class="highest">Max bid: ${{listing.maxBid}}{% if listing.currUserIsHighestBidder %} (Yours){% endif %}</p>
+                            {% else %}
+                                <p class="highest">Starting Bid: ${{listing.startingBid}}</p>
+                            {% endif %}
+                            {% localtime on %}
+                                <p class="info">Date Posted: {{listing.date.date}}</p>
+                            {% endlocaltime %}
+                            <div class="description">
+                                <div class="truncate">
+                                    {% if info.description %}
+                                        <p class="info">{{info.description}}</p>
+                                    {% else %}
+                                        <p class="info">No description</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <p class="highest">{% if listing.currUserIsHighestBidder %}You Won!{% else %}You did not win{% endif %}</p>
+                            <p class="info">Listing closed</p>
+                            <p class="info">Date Posted: {{listing.date.date}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            Nothing in watchlist
+        {% endif %}
+    </div>
+{% endblock %}

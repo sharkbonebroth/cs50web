@@ -1,0 +1,154 @@
+body {
+    padding: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+div.filterBar {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+form.filterForm {
+    float: right;
+}
+
+div.pageBody {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+div.displayAuctions {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 100px;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
+.displayAuctions > div {
+    background-color:white;
+    transition: box-shadow .3s;
+    padding: 10px;
+    min-height: 120%;
+}
+
+.displayAuctions > div.closedListing {
+    opacity: 0.5;
+    background-color:white;
+    transition: box-shadow .3s;
+    padding: 10px;
+    min-height: 120%;
+}
+
+.displayAuctions > div:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+div.listingImageDiv {
+    height:65%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+img.listingImage {
+    max-width: 70%;
+    max-height: 200px;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.listingDetails {
+    height:30%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 20%;
+}
+
+div.listingDetails > p.itemName {
+    font-size: 1.2vw;
+    margin: 0;
+    padding: 0;
+}
+
+p.itemName > a.itemLink {
+    color: inherit;
+}
+
+div.listingDetails > p.highest {
+    font-size: 1.2vw;
+    margin: 0;
+    padding: 0;
+}
+
+p.info {
+    font-weight: 100;
+    font-size: 1vw;
+    margin: 0;
+    padding: 0;
+}
+
+div.description {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+div.description > div.truncate {
+    display: table-cell;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.listingInfoPage {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 400px auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+img.listingInfoPage {
+    max-width:400px;
+    min-width:400px;
+    margin-right:50px;
+}
+
+div.listingInfoPageDetails {
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+input[type=submit].greyButton {
+    background-color: rgb(119, 119, 119);
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+}
+
+input[type=submit].lightGreyButton {
+    background-color: rgb(165, 165, 165);
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+}
+
+p.comment {
+    font-weight: 100;
+}
+
+.categoryListing {
+    width: 20%;
+    height: 30px;
+    text-align: left;
+}

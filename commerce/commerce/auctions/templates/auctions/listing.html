@@ -1,0 +1,122 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if message %}
+    <div class="alert alert-primary" role="alert">
+        {{message}}
+    </div>
+    {% endif %}
+    {% if warnMessage %}
+    <div class="alert alert-danger" role="alert">
+        {{warnMessage}}
+    </div>
+    {% endif %}
+    <div class="listingInfoPage">
+        <div>
+            <img class="listingInfoPage" src="{{listing.imageURL}}">
+        </div>
+        <div>
+            <div class="listingInfoPageDetails">
+                <h2>{{listing.itemName}}</h2>
+                {% if listing.maxBid %}
+                    <strong>Current Max Bid: ${{listing.maxBid}} {% if userIsHighestBidder %}(Yours){% endif %}</strong>
+                {% else %}
+                    <strong>No Bids Yet</strong>
+                {% endif %}
+                | Starting Bid: <u>${{listing.startingBid}}</u> | Listing made by <u>{{listing.user}}</u> on <u>{{listing.date}}</u>
+                {% if listing.description %}
+                    <br>
+                    <strong>Description:</strong>
+                    <br>
+                    {{listing.description}}
+                {% endif %}
+                <br>
+                <br>
+                {% if listing.open %}
+                    {% if user.is_authenticated %}
+                        {% if listing.user.id == user.id %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="hidden" name="listingId" value="{{listing.listingId}}">
+                                    <input type="hidden" name="action" value="close">
+                                    <input class="greyButton" type="submit" value="Close Listing">
+                                </div>
+                            </form>
+                        {% else %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="number" name="bidValue" placeholder="place your bid!" required step="0.01">
+                                    <input type="hidden" name="listingId" value="{{listing.listingId}}">
+                                    <input type="hidden" name="action" value="bid">
+                                    <input class="lightGreyButton" type="submit" value="Bid">
+                                </div>
+                            </form>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="hidden" name="listingId" value="{{listing.listingId}}">
+                                    <input type="hidden" name="action" value="addRemoveToWatchlist">
+                                    {% if watchlist %}
+                                        <input class="lightGreyButton" type="submit" value="Remove From Watchlist">
+                                    {% else %}
+                                        <input class="lightGreyButton" type="submit" value="Add to Watchlist">
+                                    {% endif %}
+                                </div>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        Sign in to bid
+                    {% endif %}
+                {% else %}
+                    {% if userIsHighestBidder %}
+                        This bid has been closed, you are the winner
+                    {% else %}
+                        This bid has been closed
+                    {% endif %}
+                    <br><br>
+                    {% if user.is_authenticated %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="hidden" name="listingId" value="{{listing.listingId}}">
+                                <input type="hidden" name="action" value="addRemoveToWatchlist">
+                                {% if watchlist %}
+                                    <input class="lightGreyButton" type="submit" value="Remove From Watchlist">
+                                {% else %}
+                                    <input class="lightGreyButton" type="submit" value="Add to Watchlist">
+                                {% endif %}
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                <hr>
+                <h3>Comments</h3>
+                {% if comments %}
+                    {% for comment in comments %}
+                        {{comment.user}} on {{comment.date}}<br>
+                        <p class="comment">{{comment.comment}}</p>
+                    {% endfor %}
+                {% else %}
+                    No comments yet
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <hr>
+                    <label for="comment">Add a comment:</label>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" name="comment" placeholder="comment" required></textarea>
+                            <input type="hidden" name="listingId" value="{{listing.listingId}}">
+                            <input type="hidden" name="action" value="comment">
+                            <br>
+                            <input class="greyButton" type="submit" value="Comment">
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

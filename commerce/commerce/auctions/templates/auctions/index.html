@@ -1,0 +1,60 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% load static %}
+{% load tz %}
+
+    {% if itemAdded %}
+    <div class="alert alert-primary" role="alert">
+        Successfully listed auction listing
+    </div>
+    {% endif %}
+    <div class="pageBody">
+        <h2>Active Listings: {{selectedCategory}}</h2>
+        <form method="post" style="float: right">
+            {% csrf_token %}
+            <label for="category">Filter By Category:</label>
+            <select name="category" placeholder="item category" required>
+                <option value="all">all</option>
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Filter">
+        </form>
+    </div>
+    <div class="displayAuctions">
+        {% if consolidatedInfo %}
+            {% for info in consolidatedInfo %}
+                <div>
+                    <div class="listingImageDiv">
+                        <a href="{% url 'reqListing' listingId=info.listingId %}"><img class = "listingImage" src="{{info.imageURL}}" alt="No image available"></a>
+                    </div>
+                    <div class="listingDetails">
+                        <p class="itemName"><a href="{% url 'reqListing' listingId=info.listingId %}" class="itemLink">{{info.itemName}}</a></p>
+                        {% if info.maxBid %}
+                            <p class="highest">Max bid: ${{info.maxBid}}{% if info.currUserIsHighestBidder %} (Yours){% endif %}</p>
+                        {% else %}
+                            <p class="highest">Starting Bid: ${{info.startingBid}}</p>
+                        {% endif %}
+                        {% localtime on %}
+                            <p class="info">Date Posted: {{info.date.date}}</p>
+                        {% endlocaltime %}
+                        <div class="description">
+                            <div class="truncate">
+                                {% if info.description %}
+                                    <p class="info">{{info.description}}</p>
+                                {% else %}
+                                    <p class="info">No description</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            No active listings available
+        {% endif %}
+    </div>
+
+{% endblock %}
